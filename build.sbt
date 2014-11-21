@@ -1,4 +1,4 @@
-name := "Test"
+name := "sqlclient"
 
 version := "1.0"
 
