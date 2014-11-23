@@ -42,7 +42,7 @@ public class Test {
       e.printStackTrace();
     }
 
-    String url = "jdbc:sqlserver://HOSP_SQL1.company.com;user=name;password=abcdefg;database=Test";
+    String url = "jdbc:sqlserver://192.168.31.184;user=bjcheny;password=;database=school";
     Connection conn = null;
     try {
       conn = DriverManager.getConnection(url);
@@ -50,7 +50,7 @@ public class Test {
       e.printStackTrace();
     }
 
-    String sql = "select * from testing_table";
+    String sql = "select * from student";
     try {
       assert conn != null;
       Statement stmt = conn.createStatement();
@@ -115,9 +115,9 @@ public class Test {
   }
 
   public static void main(String[] args) throws Exception {
-    testPostgre();
+    // testPostgre();
     // testOracle();
-    // testSqlserver();
+    testSqlserver();
     // testMysql();
   }
 
