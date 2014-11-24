@@ -58,13 +58,13 @@ public class Test {
     test(dns, sql);
   }
 
-  public static void testSqlserver() {
+  public static void testSqlserver() {  // sqlserver version
     Quartet dns = new Quartet(
-        "com.microsoft.sqlserver.jdbc.SQLServerDriver",                                    // driver
-        "jdbc:sqlserver://HOSP_SQL1.company.com;user=name;password=abcdefg;database=Test", // url
-        "",                                                                                // user
-        "");                                                                               // password
-    String sql = "show databases";
+        "com.microsoft.sqlserver.jdbc.SQLServerDriver",    // driver
+        "jdbc:sqlserver://192.168.31.184;database=school", // url
+        "bjcheny",                                         // user
+        "123");                                            // password
+    String sql = "select * from student";
     test(dns, sql);
   }
 
@@ -82,7 +82,7 @@ public class Test {
     // testPostgre();
     // testOracle();
     // testSqlserver();
-    testMysql();
+    // testMysql();
   }
 
 }
