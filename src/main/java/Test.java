@@ -68,6 +68,16 @@ public class Test {
     test(dns, sql);
   }
 
+  public static void testSqlserver2() {
+    Quartet dns = new Quartet(
+        "net.sourceforge.jtds.jdbc.Driver",
+        "jdbc:jtds:sqlserver://192.168.31.184/school;",
+        "bjcheny",
+        "123");
+    String sql = "select * from student";
+    test(dns, sql);
+  }
+
   private static void testOracle() {
     Quartet dns = new Quartet(
         "oracle.jdbc.driver.OracleDriver",
@@ -82,6 +92,7 @@ public class Test {
     // testPostgre();
     // testOracle();
     // testSqlserver();
+    testSqlserver2();
     // testMysql();
   }
 
