@@ -64,7 +64,7 @@ public class Test {
         "jdbc:sqlserver://192.168.31.184;database=school", // url
         "bjcheny",                                         // user
         "123");                                            // password
-    String sql = "select * from student";
+    String sql = "select * from sys.server_permissions";
     test(dns, sql);
   }
 
@@ -74,7 +74,7 @@ public class Test {
         "jdbc:jtds:sqlserver://192.168.31.184/school;",
         "bjcheny",
         "123");
-    String sql = "select * from student";
+    String sql = "select * from sys.server_permissions";
     test(dns, sql);
   }
 
