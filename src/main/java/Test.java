@@ -1,3 +1,6 @@
+import org.javatuples.Quartet;
+import org.javatuples.Triplet;
+
 import java.sql.*;
 
 /**
@@ -5,27 +8,27 @@ import java.sql.*;
  */
 public class Test {
 
-  private static final int PORT = Integer.parseInt(System.getProperty("port", "7686"));
-
-  public static void testPostgre() {
+  public static void test(Quartet<String, String, String, String> dns, String sql) {
+    String driver = dns.getValue0();
+    String url = dns.getValue1();
+    String user = dns.getValue2();
+    String password = dns.getValue3();
     try {
-      Class.forName("org.postgresql.Driver");
+      Class.forName(driver);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
 
-    String url = "jdbc:postgresql://127.0.0.1:5433/postgres";
-    Connection conn = null;
+    Connection connection = null;
     try {
-      conn = DriverManager.getConnection(url, "postgres", "postgres");
+      connection = DriverManager.getConnection(url, user, password);
     } catch (SQLException e) {
       e.printStackTrace();
     }
 
-    String sql="select * from pg_database";
     try {
-      assert conn != null;
-      Statement stmt = conn.createStatement();
+      assert connection != null;
+      Statement stmt = connection.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       while (rs.next()) {
         System.out.println(rs.toString());
@@ -35,90 +38,51 @@ public class Test {
     }
   }
 
-  public static void testSqlserver() {
-    try {
-      Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-
-    String url = "jdbc:sqlserver://HOSP_SQL1.company.com;user=name;password=abcdefg;database=Test";
-    Connection conn = null;
-    try {
-      conn = DriverManager.getConnection(url);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-
-    String sql = "select * from testing_table";
-    try {
-      assert conn != null;
-      Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(sql);
-      if (rs.next()) {
-        System.out.println(rs.getString("txt_title"));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private static void testOracle() {
-    try {
-      Class.forName("oracle.jdbc.driver.OracleDriver");
-    } catch (ClassNotFoundException e) {
-      System.out.println("Where is your Oracle JDBC Driver?");
-      e.printStackTrace();
-    }
-
-    Connection connection = null;
-    try {
-      connection = DriverManager.getConnection(
-              "jdbc:oracle:thin:@localhost:1521:mkyong", "username",
-              "password");
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return;
-    }
-
-    if (connection != null) {
-      System.out.println("You made it, take control of oracle");
-    } else {
-      System.out.println("Failed to make connection!");
-    }
+  public static void testPostgre() {
+    Quartet dns = new Quartet(
+        "org.postgresql.Driver",                     // driver
+        "jdbc:postgresql://127.0.0.1:5432/postgres", // url
+        "postgres",                                  // user
+        "postgres");                                 // password
+    String sql = "select * from pg_database";
+    test(dns, sql);
   }
 
   private static void testMysql() {
-    try {
-      Class.forName("com.mysql.jdbc.Driver");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      return;
-    }
+    Quartet dns = new Quartet(
+        "com.mysql.jdbc.Driver",                     // driver
+        "jdbc:mysql://localhost:3306/",              // url
+        "",                                          // user
+        "");                                         // password
+    String sql = "show databases";
+    test(dns, sql);
+  }
 
-    Connection connection = null;
-    try {
-      connection = DriverManager
-              .getConnection("jdbc:mysql://localhost:3306/","", "");
+  public static void testSqlserver() {
+    Quartet dns = new Quartet(
+        "com.microsoft.sqlserver.jdbc.SQLServerDriver",                                    // driver
+        "jdbc:sqlserver://HOSP_SQL1.company.com;user=name;password=abcdefg;database=Test", // url
+        "",                                                                                // user
+        "");                                                                               // password
+    String sql = "show databases";
+    test(dns, sql);
+  }
 
-    } catch (SQLException e) {
-      System.out.println("Connection Failed! Check output console");
-      e.printStackTrace();
-      return;
-    }
-
-    if (connection != null) {
-      System.out.println("You made it, take control of mysql");
-    } else {
-      System.out.println("Failed to make connection!");
-    }
+  private static void testOracle() {
+    Quartet dns = new Quartet(
+        "oracle.jdbc.driver.OracleDriver",
+        "jdbc:oracle:thin:@localhost:1521:mkyong", // url
+        "",                                        // user
+        "");                                       // password
+    String sql = "show databases";
+    test(dns, sql);
   }
 
   public static void main(String[] args) throws Exception {
-    testPostgre();
+    // testPostgre();
     // testOracle();
     // testSqlserver();
-    // testMysql();
+    testMysql();
   }
 
 }
