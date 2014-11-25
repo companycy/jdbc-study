@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="SBT: net.sourceforge.jtds:jtds:1.2.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.sourceforge.jtds/jtds/jars/jtds-1.2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/jtds-1.2.7-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../jtds-1.2.8-src/build/src" />
+      <root url="file://$PROJECT_DIR$/../jtds-1.2.8-src/build/testsrc" />
+      <root url="file://$PROJECT_DIR$/../jtds-1.2.8-src/src/main" />
+      <root url="file://$PROJECT_DIR$/../jtds-1.2.8-src/src/test" />
+      <root url="file://$PROJECT_DIR$/../jtds-1.2.8-src/src/tools" />
+    </SOURCES>
+  </library>
+</component>

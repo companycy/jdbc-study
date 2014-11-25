@@ -71,7 +71,7 @@ public class Test {
   public static void testSqlserver2() {
     Quartet dns = new Quartet(
         "net.sourceforge.jtds.jdbc.Driver",
-        "jdbc:jtds:sqlserver://192.168.31.184/school;",
+        "jdbc:jtds:sqlserver://192.168.31.133;",
         "bjcheny",
         "123");
     String sql = "select * from sys.server_permissions";
